@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS -->
+</head>
+
+<audio id="background-music" loop>
+    <source src="C:/Users/ASUS/Documents/CPC354/FINALEE - Copy/docs/audio/tv ident bgm.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>  
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>3D Sierpinski Gasket TV Ident</title>
+
+    <script type="text/javascript" src="Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="Common/initShaders.js"></script>
+    <script type="text/javascript" src="Common/MV.js"></script>
+    <script type="text/javascript" src="Gasket3D.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 vPosition;
+    attribute vec4 vColor;
+    varying vec4 fColor;
+    uniform vec3 theta;
+    uniform float scale;
+    uniform vec2 trans;
+
+    void main() {
+        vec3 angles = radians(theta);
+        vec3 c = cos(angles);
+        vec3 s = sin(angles);
+
+        mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,
+                       0.0, c.x, s.x, 0.0,
+                       0.0, -s.x, c.x, 0.0,
+                       0.0, 0.0, 0.0, 1.0);
+
+        mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,
+                       0.0, 1.0, 0.0, 0.0,
+                       s.y, 0.0, c.y, 0.0,
+                       0.0, 0.0, 0.0, 1.0);
+
+        mat4 rz = mat4(c.z, s.z, 0.0, 0.0,
+                       -s.z, c.z, 0.0, 0.0,
+                       0.0, 0.0, 1.0, 0.0,
+                       0.0, 0.0, 0.0, 1.0);
+        
+        mat4 rotationMat = rz * ry * rx;
+
+        mat4 scalingMat = mat4(scale, 0.0, 0.0, 0.0,
+                               0.0, scale, 0.0, 0.0,
+                               0.0, 0.0, scale, 0.0,
+                               0.0, 0.0, 0.0, 1.0);
+
+        mat4 transMat = mat4(1.0, 0.0, 0.0, 0.0,
+                             0.0, 1.0, 0.0, 0.0,
+                             0.0, 0.0, 1.0, 0.0,
+                             trans[0], trans[1], 0.0, 1.0);
+
+        gl_Position = transMat * scalingMat * rotationMat * vPosition;
+        fColor = vColor;
+    }
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    varying vec4 fColor;
+
+    void main() {
+        gl_FragColor = fColor;
+    }
+    </script>
+
+</head>
+
+<body>
+    <div class="header">
+        <p>✨ Customize Your Sierpinski Gasket! ✨</p>
+    </div>
+        <div id="menu">
+            <!-- Colors Settings -->
+            <div class="propertybox">
+                <h3>Color Settings</h3>
+                <label for="color1" class="colorlabel">Face 1</label>
+                <label for="color2" class="colorlabel">Face 2</label>
+                <label for="color3" class="colorlabel">Face 3</label>
+                <label for="color4" class="colorlabel">Face 4</label><br>
+                <input type="color" id="color1" class="colorpicker" name="color1" value="#00FFFF" title="Choose the color for Face 1">
+                <input type="color" id="color2" class="colorpicker" name="color2" value="#00FF99" title="Choose the color for Face 2">
+                <input type="color" id="color3" class="colorpicker" name="color3" value="#00801A" title="Choose the color for Face 3">
+                <input type="color" id="color4" class="colorpicker" name="color4" value="#E64D33" title="Choose the color for Face 4">
+            </div>
+
+            <!-- Detail and Scale Settings -->
+            <div class="propertybox">
+                <h3>Detail & Scale</h3>
+                <label for="division">Subdivision Detail</label>
+                <input type="range" id="division" class="slider settings" name="division" min="1" max="5" step="1" value="3" title="Adjust the detail level of the gasket">
+                <input type="text" class="textbox" name="division" value="3" readonly><br>
+                <label for="scale">Starting Size</label>
+                <input type="range" id="scale" class="slider settings" name="scale" min="0.5" max="3" step="0.5" value="1" title="Set the initial scale of the gasket">
+                <input type="text" class="textbox" name="scale" value="1" readonly>
+            </div>
+
+            <!-- Animation Settings -->
+            <div class="propertybox">
+                <h3>Animation Settings</h3>
+                <label for="speed">Animation Speed</label>
+                <input type="range" id="speed" class="slider settings" name="speed" min="100" max="800" step="100" value="200" title="Set the speed of the animation">
+                <input type="text" class="textbox" name="speed" value="200" readonly><br>
+                <label for="scaleFac">Zoom Factor</label>
+                <input type="range" id="scaleFac" class="slider settings" name="scaleFac" min="0.5" max="3" step="0.5" value="3" title="Adjust the scaling factor for the animation">
+                <input type="text" class="textbox" name="scaleFac" value="3" readonly><br>
+                <label for="degree">Rotation Angle (°)</label>
+                <input type="range" id="degree" class="slider settings" name="degree" min="0" max="360" step="10" value="180" title="Set the rotation angle">
+                <input type="text" class="textbox" name="degree" value="180" readonly><br>
+            </div>
+
+            <!-- Advanced Animation Options -->
+            <div class="propertybox">
+                <h3>Advanced Options</h3>
+                <label for="rotateX">Rotate on X-axis</label>
+                <input type="checkbox" id="rotateX" name="rotateX" checked title="Toggle rotation on the X-axis"><br>
+                <label for="rotateY">Rotate on Y-axis</label>
+                <input type="checkbox" id="rotateY" name="rotateY" checked title="Toggle rotation on the Y-axis"><br>
+                <label for="transMode">Translation Style</label>
+                <select id="transMode" class="settings" name="transMode" title="Choose a translation style for the animation">
+                    <option value="0">Default</option>
+                    <option value="1">Rotating</option>
+                    <option value="2">Dancing</option>
+                    <option value="3">Flipping</option>
+                    <option value="4">Spiral Dance</option>
+                </select>
+            </div>   
+         <div class="button-container">
+            <input type="button" id="start-button" value="START" title="Start">
+            <input type="button" id="restart-button" value="RESTART" title="Restart">
+        </div>            
+    </div>
+    
+    <canvas id="gl-canvas" width="512" height="512">
+            Oops ... your browser doesn't support the HTML5 canvas element
+    </canvas>
+</body>
+
+</html>

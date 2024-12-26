@@ -1,0 +1,267 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Pacifico&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(75deg, #ff0099, #c17da8, #f5b1dc); /* Soft pink gradient */
+  background-size: 200% 200%;
+  animation: gradient-flow 10s ease infinite;
+  font-family: 'Nunito', sans-serif;
+  color: #4A4A4A;
+  line-height: 1.6;
+}
+
+/* Gradient Animation */
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header Styling */
+.header {
+  margin-right: 6%;
+  margin-top: -1%;
+  text-align: right;
+  color: #ffffff; /* Deep pink for contrast */
+  font-family: 'Pacifico', cursive; /* Playful, handwritten style for headers */
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(199, 21, 133, 0.2);
+}
+
+/* Canvas Styling */
+canvas {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  transform: translateY(-50%);
+  width: 90vh;
+  height: 90vh;
+  display: block;
+  box-sizing: border-box;
+  border: 0.5rem solid rgba(255, 182, 193, 0.3); /* Light pink border */
+  border-radius: 15px;
+  background-color: rgba(255, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(199, 21, 133, 0.2);
+}
+
+/* Menu Styling */
+#menu {
+  margin-top: 4%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+  position: fixed;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  right: 4%;
+  top: 5%;
+  width: 40vw;
+  padding: 2vw;
+  background: rgba(255, 182, 193, 0.2); /* Soft pink background */
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(199, 21, 133, 0.2);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+/* Individual Property Boxes */
+.propertybox {
+  padding: 0.1rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(199, 21, 133, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+}
+
+.propertybox:hover {
+  background: rgba(255, 182, 193, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Property Box Headings */
+.propertybox h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  color: #ffffff; /* Deep pink */
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Sliders */
+.slider {
+  width: 80%;
+  margin: 10px 0;
+  accent-color: #af0046; /* Slider accent color */
+}
+
+/* Textboxes */
+.textbox {
+  width: 2rem;
+  height: 1rem;
+  border: 1px solid rgba(199, 21, 133, 0.3);
+  border-radius: 3px;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  color: #000000;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+/* Button Container */
+.button-container {
+  grid-column: span 2;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Increased gap between buttons */
+}
+
+/* Buttons */
+button {
+  width: 15rem; /* Increased width */
+  height: 4.5rem; /* Increased height */
+  border: none;
+  font-size: 1.3rem; /* Larger font size */
+  font-weight: 700; /* Bolder font weight */
+  letter-spacing: 2px; /* Increased letter spacing */
+  border-radius: 35px; /* Slightly more rounded corners */
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  /* Enhanced pop-out effect */
+  transform: perspective(600px);
+  box-shadow: 0 15px 25px rgba(199, 21, 133, 0.4);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase; /* Capitalized text */
+}
+
+/* Hover and Active States */
+button:hover {
+  transform: scale(1.07) perspective(600px) rotateX(7deg);
+  box-shadow: 0 20px 35px rgba(199, 21, 133, 0.5);
+}
+
+button:active {
+  transform: scale(0.95) perspective(600px) rotateX(-5deg);
+  box-shadow: 0 8px 15px rgba(199, 21, 133, 0.3);
+}
+
+/* Start Button Specific Styling */
+#start-button {
+  background: linear-gradient(45deg, #FF1493, #FFB6C1);
+  font-family: 'Nunito', sans-serif;
+  color: white;
+  background-size: 200% 200%;
+  animation: button-shine 3s ease infinite;
+}
+
+#start-button:hover {
+  background: linear-gradient(45deg, #FFB6C1, #FF1493);
+}
+
+/* Restart Button Specific Styling */
+#restart-button {
+  background: linear-gradient(45deg, #C71585, #FF69B4);
+  font-family: 'Nunito', sans-serif;
+  color: white;
+  background-size: 200% 200%;
+  animation: button-shine 3s ease infinite;
+}
+
+#restart-button:hover {
+  background: linear-gradient(45deg, #FF69B4, #C71585);
+}
+
+/* Shine Animation */
+@keyframes button-shine {
+  0% { background-position: -100% 0; }
+  40% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+#restart-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  animation: none;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  accent-color: #C71585;
+  transform: scale(1.2);
+}
+
+/* Dropdowns */
+select {
+  padding: 0.5rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  background: rgba(255, 182, 193, 0.2);
+  color: #b479c1;
+  border: 1px solid rgba(199, 21, 133, 0.3);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+select:hover {
+  background: rgba(255, 182, 193, 0.4);
+}
+
+/* Color Pickers */
+.colorpicker {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid rgba(199, 21, 133, 0.2);
+  border-radius: 10px; /* Changed from 50% (circle) to 10px (rounded square) */
+  box-shadow: 0 2px 5px rgba(199, 21, 133, 0.2);
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.3s ease;
+  appearance: none; /* Removes default browser styling */
+  -webkit-appearance: none; /* For webkit browsers */
+  /* Default to a monochrome palette */
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 25%, #d0d0d0 50%, #c0c0c0 75%, #b0b0b0 100%);
+  overflow: hidden;
+}
+
+.colorpicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border: none;
+}
+
+.colorpicker::-webkit-color-swatch {
+  border: none;
+  border-radius: 8px; /* Slightly smaller than container to show border */
+}
+
+.colorpicker:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(199, 21, 133, 0.3);
+}
+
+/* Advanced Options */
+#advanced-options {
+  max-height: none;
+  overflow-y: visible;
+}
